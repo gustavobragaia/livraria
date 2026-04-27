@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt"%>
+<fmt:setLocale value="pt_BR" />
+
 
 <table border="1">
     <caption>
@@ -36,8 +39,16 @@
     </tr>
     <tr>
         <td><label for="preco">Preco</label></td>
-        <td><input type="number" id="preco" name="preco" required min="0.01" step="any" size="5" value="${livro.preco}" /></td>
-        
+        <td>
+            <c:if test="${livro != null}">
+                <fmt:formatNumber value="${livro.preco}" minFractionDigits="2" maxFractionDigits="2" var="precoFormatado"/>
+            </c:if>
+            <input type="text" id="preco" name="preco" required size="10"
+                placeholder="54,00"
+                pattern="^\\d{1,3}(\\.\\d{3})*(,\\d{2})?$|^\\d+(\\.\\d{2})?$"
+                value="${livro != null ? precoFormatado : ''}" />
+        </td>
+                
     </tr>
     <tr>
         <td colspan="2" align="center"><input type="submit" value="Salvar" /></td>

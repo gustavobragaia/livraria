@@ -141,4 +141,20 @@ public class LivroController extends HttpServlet {
         response.sendRedirect("lista");
     }
 
+      private Float parsePreco(String preco) {
+        String valor = preco.trim();
+
+        if (valor.contains(",") && valor.contains(".")) {
+            if (valor.lastIndexOf(",") > valor.lastIndexOf(".")) {
+                valor = valor.replace(".", "").replace(",", ".");
+            } else {
+                valor = valor.replace(",", "");
+            }
+        } else if (valor.contains(",")) {
+            valor = valor.replace(",", ".");
+        }
+
+        return Float.parseFloat(valor);
+    }
+
 }

@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt"%>
+
 <html>
 <head>
 <title>Livraria Virtual</title>
 </head>
 <body>
+    <fmt:setLocale value="pt_BR" />
+
     <div align="center">
         <h1>Gerenciamento de Livros</h1>
         <h2>
@@ -33,8 +37,8 @@
                     <td>${livro.editora.nome}</td>
                     <td>${livro.autor}</td>
                     <td>${livro.ano}</td>
-                    <td>${livro.preco}</td>
-                                        <td>
+                    <td>R$ <fmt:formatNumber value="${livro.preco}" minFractionDigits="2" maxFractionDigits="2"/></td>
+                                                            <td>
                         <a href="/${requestScope.contextPath}/livros/edicao?id=${livro.id}">Edicao</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="/${requestScope.contextPath}/livros/remocao?id=${livro.id}"
